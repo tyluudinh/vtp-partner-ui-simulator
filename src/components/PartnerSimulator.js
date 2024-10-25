@@ -67,7 +67,7 @@ const PartnerSimulator = () => {
             const tokenVal = await authService.generateToken(
                 configs.clientId,
                 configs.clientSecret,
-                configs.genPartnerTokenUrl
+                configs.vietcapApiUrl
             );
 
             await authService.authorize(
@@ -75,7 +75,7 @@ const PartnerSimulator = () => {
                 configs.redirectUri,
                 configs.partnerUserId,
                 tokenVal,
-                configs.linkAccountUrl
+                configs.vietcapApiUrl
             );
 
             // navigate('/oauth/callback', {replace: true});
