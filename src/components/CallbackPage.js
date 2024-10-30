@@ -67,9 +67,7 @@ const CallbackPage = () => {
       {loading && <p>Loading...</p>}
 
       {tokenResult && (
-        <pre>
-          {tokenResult}
-        </pre>
+        <pretty-json>{token.data}</pretty-json>
       )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
