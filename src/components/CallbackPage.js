@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import authService from '../services/authService';
 import StoreService from '../services/storeService';
+import PrettyJson from './PrettyJson';
 
 const CallbackPage = () => {
   const [searchParams] = useSearchParams();
@@ -49,13 +50,6 @@ const CallbackPage = () => {
     }
   }, [authorizationCode, configs.vietcapApiUrl]);
 
-  const tokenResult = useMemo(() => {
-    if (token.data) {
-      return JSON.stringify(token.data, undefined, 2);
-    }
-    return null;
-  }, [token.data])
-
   return (
     <div>
       <h1>OAuth Callback</h1>
@@ -66,8 +60,8 @@ const CallbackPage = () => {
       )}
       {loading && <p>Loading...</p>}
 
-      {tokenResult && (
-        <pretty-json>{token.data}</pretty-json>
+      {token.data && (
+        <PrettyJson data={token.data} />
       )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
