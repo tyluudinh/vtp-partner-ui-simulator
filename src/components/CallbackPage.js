@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import authService from '../services/authService';
 import StoreService from '../services/storeService';
@@ -6,7 +6,7 @@ import StoreService from '../services/storeService';
 const CallbackPage = () => {
   const [searchParams] = useSearchParams();
   const [authorizationCode, setAuthorizationCode] = useState('');
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [configs, setConfigs] = useState({});
@@ -49,6 +49,13 @@ const CallbackPage = () => {
     }
   }, [authorizationCode, configs.vietcapApiUrl]);
 
+  const tokenResult = useMemo(() => {
+    if (token.data) {
+      return JSON.stringify(token.data, undefined, 2);
+    }
+    return null;
+  }, [token.data])
+
   return (
     <div>
       <h1>OAuth Callback</h1>
@@ -59,14 +66,10 @@ const CallbackPage = () => {
       )}
       {loading && <p>Loading...</p>}
 
-      {token && (
-        <div>
-          <p>Token: <strong>{token.data.accessToken}</strong></p>
-          <p>RefreshToken: <strong>{token.data.refreshToken}</strong></p>
-          <p>ExpiresIn: <strong>{token.data.expiresIn}</strong></p>
-          <p>efreshExpiresIn: <strong>{token.data.refreshExpiresIn}</strong></p>
-
-        </div>
+      {tokenResult && (
+        <pre>
+          {tokenResult}
+        </pre>
       )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
