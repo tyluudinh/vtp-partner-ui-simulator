@@ -7,7 +7,7 @@ const PrettyJson = ({ data }) => {
     numberStyle: { color: 'darkorange' }
   }
 
-  return <JsonFormatter json={data} tabWith={4} jsonStyle={jsonStyle} />
+  return <JsonFormatter jsonClassName={{ className: 'json-formatter'}} json={data} tabWith={4} jsonStyle={jsonStyle} />
 
 }
 
