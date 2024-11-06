@@ -64,6 +64,7 @@ const PartnerSimulator = () => {
         if (loading) return;
         setLoading(true);
         try {
+            StoreService.setStore(configs);
             const tokenVal = await authService.generateToken(
                 configs.clientId,
                 configs.clientSecret,
@@ -141,7 +142,7 @@ const PartnerSimulator = () => {
                 />
 
                 <button type="submit">
-                    {loading && <span class="loader"></span>} Show Vietcap Login Page
+                    {loading && <span className="loader"></span>} Show Vietcap Login Page
                 </button>
             </form>
         </div>
