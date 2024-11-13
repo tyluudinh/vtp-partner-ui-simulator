@@ -22,22 +22,27 @@ const PartnerSimulator = () => {
         const storeConfig = StoreService.getStore();
 
         const clientId =
-            storeConfig.clientId || searchParams.get("client_id") || defaultConfigs.clientId;
+            searchParams.get("client_id") ||
+            storeConfig.clientId || defaultConfigs.clientId;
+            
         const clientSecret =
-            storeConfig.clientSecret ||
             searchParams.get("client_secret") ||
+            storeConfig.clientSecret ||
             defaultConfigs.clientSecret;
+            
         const partnerUserId =
-            storeConfig.partnerUserId ||
             searchParams.get("partner_user_id") ||
+            storeConfig.partnerUserId ||
             defaultConfigs.partnerUserId;
+
         const redirectUri =
-            storeConfig.redirectUri ||
             searchParams.get("redirect_uri") ||
+            storeConfig.redirectUri ||
             defaultConfigs.redirectUri;
+
         const vietcapApiUrl =
-            storeConfig.vietcapApiUrl ||
             searchParams.get("vietcap_api_url") ||
+            storeConfig.vietcapApiUrl ||
             defaultConfigs.vietcapApiUrl;
 
         setConfigs({
